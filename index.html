@@ -4,9 +4,149 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <script src="main.5f83ffc418b18c88d57f.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="sudoku.css"/>
+    <link type="text/css" rel="stylesheet" href="index.css"/>
+
+    <script src="main.74acb613b20498014684.js" defer></script>
 </head>
 <body>
+    <div class="container-fluid">
+        <h1 class="m-auto wrap-width">Sudoku solver</h1>
+        <hr />
 
+        <div class="control-panel m-auto sudoku-width pb-1">
+            <button class="btn btn-primary" id="solve">Solve</button>
+            <button class="btn btn-primary" id="check">Check</button>
+            <button class="btn btn-secondary float-right" id="clear">Clear</button>
+        </div>
+
+        <div class="sudoku-grid mb-1">
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-divider"></div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-divider"></div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+            <div class="sudoku-row">
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-divider"></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+                <div class="sudoku-cell"><span class="cell-text"></span></div>
+            </div>
+        </div>
+
+        <div class="m-auto status-container sudoku-width">
+            <span class="status-text"></span>
+        </div>
+        <p class="m-auto sudoku-width text-justify">Hover over a cell and hit a number on your keyboard to enter a number in a cell.</p>
+    </div>
 </body>
 </html>

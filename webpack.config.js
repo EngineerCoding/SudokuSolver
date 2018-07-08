@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 const srcDir = path.join(__dirname, 'src');
 const distDir = path.join(__dirname, 'dist');
@@ -7,6 +6,7 @@ const distDir = path.join(__dirname, 'dist');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = env => {
 
@@ -27,7 +27,11 @@ module.exports = env => {
         inject: false,
         template: path.join(srcDir, 'index.html'),
         production: !!env.production
-      })
+      }),
+      new CopyWebpackPlugin([
+        {from: path.join(srcDir, 'index.css'), to: distDir},
+        {from: path.join(srcDir, 'sudoku.css'), to: distDir}
+      ])
     ],
     module: {
       rules: [
@@ -36,15 +40,12 @@ module.exports = env => {
           include: srcDir,
           loader: 'babel-loader',
           options: {
-            "presets": ['latest']
+            presets: ['latest'],
           }
         },
         {
           test: '/\.html$/',
           loader: 'html-loader',
-          options: {
-            minimize: !!env.production
-          }
         }
       ],
     }

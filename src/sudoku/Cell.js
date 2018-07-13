@@ -85,9 +85,24 @@ export default class Cell {
     return this.value;
   }
 
+  setCorrectValue() {
+    this.resetBackgroundColor();
+    this.cellElement.classList.add('correct-value');
+  }
+
+  setIncorrectValue() {
+    this.resetBackgroundColor();
+    this.cellElement.classList.add('incorrect-value');
+  }
+
+  resetBackgroundColor() {
+    this.cellElement.classList.remove('correct-value', 'incorrect-value');
+  }
+
   clear() {
     this.setValue(null);
     this.setFixed(true);
+    this.resetBackgroundColor();
   }
 
 }

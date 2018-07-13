@@ -1,13 +1,16 @@
 import Grid from './sudoku/Grid';
+import Checker from "./sudoku/Checker";
 
 const sudokuGrid = new Grid(document.body.getElementsByClassName('sudoku-grid')[0]);
+const sudokuChecker = new Checker(sudokuGrid, true);
+sudokuGrid.bindChecker(sudokuChecker);
+
 
 const gridInteractionButtons = {
   solve: document.getElementById('solve'),
   check: document.getElementById('check'),
   clear: document.getElementById('clear')
 };
-
 
 function disableAndRun(func) {
   return function(event) {
@@ -17,5 +20,23 @@ function disableAndRun(func) {
   }
 }
 
+
+let lastTimeout = null;
+const statusText = document.body.getElementsByClassName('status-text')[0];
+function setStatusMessage(message) {
+  clearTimeout(lastTimeout);
+  statusText.innerText = message;
+  lastTimeout = setTimeout(() => statusText.innerText = '', 5000);
+}1
+
+gridInteractionButtons.check.addEventListener('click',
+  disableAndRun(() => {
+    let message = 'valid sudoku';
+    if (!sudokuChecker.isValid()) {
+      message = 'in' + message;
+    }
+
+    setStatusMessage(message.charAt(0).toUpperCase() + message.slice(1));
+  }));
 gridInteractionButtons.clear.addEventListener('click',
   disableAndRun(sudokuGrid.clear.bind(sudokuGrid)));

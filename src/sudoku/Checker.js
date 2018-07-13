@@ -31,8 +31,8 @@ export default class Checker {
 
   reset() {
     const checker = this;
-    this.grid.cellMatrix.forEach(row => {
-      checker.validCellTracker.push([...Array(row.length).keys()].map(idx => true));
+    this.grid.cellMatrix.forEach((row, idx) => {
+      checker.validCellTracker[idx] = [...Array(row.length).keys()].map(key => true);
     });
   }
 

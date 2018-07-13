@@ -3,6 +3,8 @@
     --border-color: black;
     --inside-border-color: black;
     --cell-hover-color: #e5e3e3;
+    --cell-correct-value: lime;
+    --cell-incorrect-value: red;
 }
 
 .sudoku-grid {
@@ -26,6 +28,16 @@
 .sudoku-grid > .sudoku-row > .sudoku-cell:hover,
 .sudoku-grid > .sudoku-row > .sudoku-cell.value-set {
     background-color: var(--cell-hover-color);
+}
+
+.sudoku-grid > .sudoku-row > .sudoku-cell.correct-value,
+.sudoku-grid > .sudoku-row > .sudoku-cell.value-set.correct-value {
+    background-color: var(--cell-correct-value);
+}
+
+.sudoku-grid > .sudoku-row > .sudoku-cell.incorrect-value,
+.sudoku-grid > .sudoku-row > .sudoku-cell.value-set.incorrect-value {
+    background-color: var(--cell-incorrect-value);
 }
 
 .sudoku-grid > .sudoku-row > .sudoku-cell > .cell-text {

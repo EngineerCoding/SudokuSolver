@@ -15,6 +15,13 @@
         <h1 class="m-auto wrap-width">Sudoku solver</h1>
         <hr />
 
+        <div class="mx-auto mb-1 sudoku-width alert alert-danger alert-dismissible show" role="alert">
+            <span>The solve functionality can only be run once per board. After clearing the board, solve is available again.</span>
+            <button type="button" class="close" onclick="this.parentElement.classList.add('d-none');">
+                <span>&times;</span>
+            </button>
+        </div>
+
         <div class="control-panel m-auto sudoku-width pb-1">
             <button class="btn btn-primary" id="solve">Solve</button>
             <button class="btn btn-primary" id="check">Check</button>

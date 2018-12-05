@@ -50,16 +50,11 @@ export default class Solver {
   constructor(grid) {
     this.grid = grid;
     this.optionsGrid = this.indexGrid();
-
-    this.positions = [];
   }
 
   indexGrid() {
     this.grid.iterateCells(cell => {
-      if (cell.getValue() == null) {
-        this.positions.push(cell.getPosition());
-        cell.setFixed(false);
-      }
+      cell.setFixed(cell.getValue() !== null);
     });
 
     const mode = this.grid.getMode();
@@ -80,18 +75,18 @@ export default class Solver {
   }
 
   checkCell(x, y, removedValue) {
-    // If already finalized, stop
+    // If already a number or finalized, stop
     const cell = this.optionsGrid.getCell(x, y);
-    if (cell.isFinalized()) return;
+    if (Number.isInteger(cell) || cell.isFinalized()) return;
 
     const fixedValues = [];
     const hasRemovedValue = Number.isInteger(removedValue);
 
     // Collect all cells which cross this cell
     let crossingCells = [];
-    crossingCells.push(...this.grid.getColumn(y));
-    crossingCells.push(...this.grid.getRow(x));
-    crossingCells.push(...this.grid.getSubGridCells(x, y));
+    crossingCells.push(...this.optionsGrid.getColumn(y));
+    crossingCells.push(...this.optionsGrid.getRow(x));
+    crossingCells.push(...this.optionsGrid.getSubGridCells(x, y));
 
     if (!hasRemovedValue) fixedValues.push(...crossingCells.filter(Number.isInteger));
 
@@ -115,12 +110,12 @@ export default class Solver {
       });
 
     // Collect the finalized cells
-    if (!hasRemovedValue) {
+    if (hasRemovedValue) {
+      fixedValues.push(removedValue);
+    } else {
       crossingCells
         .filter(cell => cell.isFinalized())
         .forEach(cell => fixedValues.push(cell.getFinalizedValue()));
-    } else {
-      fixedValues.push(removedValue);
     }
 
     // Remove the values from the current cell
@@ -136,6 +131,12 @@ export default class Solver {
   }
 
   solve() {
-
+    // first check all cells
+    const size = this.grid.getMode() ** 2;
+    for (let x = 0; x < size; x++) {
+      for (let y = 0; y < size; y++) {
+        this.checkCell(x, y);
+      }
+    }
   }
 }

@@ -67,7 +67,8 @@ export default class DomGrid extends Grid {
   }
 
   clear() {
-    this.iterateCells(cell => cell.clear());
+    super.clear();
     if (this.checker) this.checker.reset();
   }
+
 }

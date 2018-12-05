@@ -36,7 +36,7 @@ export default class Cell {
 
   clear() {
     this.setValue(null);
-    this.setFixed(true);
+    this.setFixed(false);
   }
 
 }

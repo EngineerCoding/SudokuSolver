@@ -43,12 +43,12 @@ export default function getCellUtils(cell) {
 /** Proxy methods **/
 
 export function setCellBackgroundCorrect(cell) {
-  if (cell.getValue() === null || !cell.isFixed()) return;
+  if (cell.getValue() === null || cell.isFixed()) return;
   getCellUtils(cell).setBackgroundCorrect();
 }
 
 export function setCellBackgroundIncorrect(cell) {
-  if (cell.getValue() === null || !cell.isFixed()) return;
+  if (cell.getValue() === null || cell.isFixed()) return;
   getCellUtils(cell).setBackgroundIncorrect();
 }
 

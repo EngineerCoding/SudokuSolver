@@ -28,18 +28,21 @@ const statusText = document.body.getElementsByClassName('status-text')[0];
 function setStatusMessage(message, indefinite) {
   clearTimeout(lastTimeout);
   statusText.innerText = message;
-  if (!!indefinite) {
+  if (!indefinite) {
     lastTimeout = setTimeout(() => statusText.innerText = '', 5000);
   }
 }
 
-gridInteractionButtons.solve.addEventListener('click',
+gridInteractionButtons.solve.addEventListener('click', () => {
   disableAndRun(() => {
     setStatusMessage('Solving..', true);
     const sudokuSolver = new Solver(sudokuGrid);
     sudokuSolver.solve();
     setStatusMessage('', false);
-  }));
+  })();
+  gridInteractionButtons.solve.disabled = true;
+  gridInteractionButtons.check.disabled = true;
+});
 
 gridInteractionButtons.check.addEventListener('click',
   disableAndRun(() => {

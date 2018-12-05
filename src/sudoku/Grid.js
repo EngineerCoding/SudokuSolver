@@ -59,4 +59,8 @@ export default class Grid {
     return cells;
   }
 
+  clear() {
+    this.iterateCells(cell => cell.clear());
+  }
+
 }

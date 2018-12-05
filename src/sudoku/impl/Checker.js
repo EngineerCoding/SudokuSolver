@@ -1,15 +1,21 @@
+import {
+  resetCellBackground,
+  setCellBackgroundCorrect,
+  setCellBackgroundIncorrect
+} from "../CellUtils";
 
 
 export default class Checker {
 
   constructor(grid, applyBackgroundColors) {
     this.grid = grid;
-    this.backgroundColorMode = !!applyBackgroundColors;
+    this.backgroundColorMode = true;
 
     this.validCellTracker = [];
     this.reset();
 
     this.checkCell = this.checkCell.bind(this);
+    this.setBackgroundColorMode(!!applyBackgroundColors);
   }
 
   setBackgroundColorMode(backgroundColorMode) {
@@ -41,21 +47,21 @@ export default class Checker {
     this.grid.iterateCells(cell => {
       const position = cell.getPosition();
       if (checker.validCellTracker[position.x][position.y]) {
-        cell.setCorrectValue();
+        setCellBackgroundCorrect(cell);
       } else {
-        cell.setIncorrectValue();
+        setCellBackgroundIncorrect(cell);
       }
     });
   }
 
   resetBackground() {
-    this.grid.iterateCells(cell => cell.resetBackgroundColor());
+    this.grid.iterateCells(resetCellBackground);
   }
 
   checkCell(cell, dontCascade, checkedCells) {
     // Check if value is even available
     const value = cell.getValue();
-    cell.resetBackgroundColor();
+    resetCellBackground(cell);
 
     checkedCells = checkedCells || [];
     checkedCells.push(cell);
@@ -68,8 +74,8 @@ export default class Checker {
     const compareWithCell = otherCell => {
       if (positionString !== JSON.stringify(otherCell.getPosition())) {
         if (value !== null && value === otherCell.getValue()) {
-          otherCell.setIncorrectValue();
-          cell.setIncorrectValue();
+          setCellBackgroundIncorrect(otherCell);
+          setCellBackgroundIncorrect(cell);
           validCell = false;
         } else if (!dontCascade && checkedCells.indexOf(otherCell) === -1) {
           parent.checkCell(otherCell, !!dontCascade, checkedCells);
@@ -82,7 +88,7 @@ export default class Checker {
     this.grid.getSubGridCells(position.x, position.y).forEach(compareWithCell);
 
     this.validCellTracker[position.x][position.y] = value === null || validCell;
-    if (validCell && this.backgroundColorMode) cell.setCorrectValue();
+    if (validCell && this.backgroundColorMode) setCellBackgroundCorrect(cell);
     return validCell;
   }
 
